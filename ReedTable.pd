@@ -1,0 +1,16 @@
+#N canvas 312 287 450 300 10;
+#X obj 118 96 *~ \$1;
+#X obj 118 66 inlet~;
+#X obj 118 124 +~ \$2;
+#X text 166 94 slope;
+#X text 167 125 offset;
+#X obj 118 181 outlet~;
+#X obj 118 153 clip~ -1 1;
+#X obj 227 61 inlet;
+#X obj 287 60 inlet;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 6 0;
+#X connect 6 0 5 0;
+#X connect 7 0 0 1;
+#X connect 8 0 2 1;

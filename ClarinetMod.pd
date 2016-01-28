@@ -1,0 +1,108 @@
+#N canvas 145 56 968 649 10;
+#X obj 544 145 line~;
+#X msg 589 112 0 100;
+#X obj 543 359 +~;
+#X obj 464 334 rzero~;
+#X obj 161 588 dac~;
+#X obj 198 529 hsl 128 15 0 0.1 0 0 empty empty Output_Gain -2 -8 0
+10 -262144 -1 -1 0 1;
+#X obj 528 454 *~;
+#X obj 527 481 +~;
+#X obj 171 411 +~;
+#X obj 203 389 *~;
+#X obj 171 370 *~;
+#X obj 221 316 hsl 128 15 0 1 0 0 empty empty Alpha -2 -8 0 10 -262144
+-1 -1 6350 1;
+#X obj 218 341 swap 1;
+#X obj 218 365 -;
+#X obj 162 551 *~ 0.1;
+#X msg 219 282 0.5;
+#X msg 544 112 1 100;
+#X obj 171 342 z~ 1;
+#X obj 551 427 ReedTable -0.3 0.7;
+#X obj 528 511 delwrite~ clarinetDel 1000;
+#X obj 544 85 bng 15 250 50 0 empty empty On 17 7 0 10 -262144 -1 -1
+;
+#X obj 589 84 bng 15 250 50 0 empty empty Off 17 7 0 10 -262144 -1
+-1;
+#X obj 219 257 loadbang;
+#X obj 614 182 osc~ 5.735;
+#X text -10 350 helps to even out the sound;
+#X text -11 365 (it's a low pass filter).;
+#X text -10 336 Averaging adjacent samples;
+#X obj 193 473 r freq;
+#X text 25 497 Filter the sound for;
+#X text 25 510 pesky harmonics.;
+#X text 593 294 Breath pressure + vibrato;
+#X obj 465 363 *~ -0.95;
+#X obj 511 410 -~;
+#X text 579 355 Nonlinear oscillator to model the mouth piece of the
+clarinet. The pressure difference (between the "forward" breath pressure
+and "backward" reflected pressure) is multiplied by a coefficient calculated
+in the ReedTable \, and then added to the breath pressure.;
+#X obj 600 233 *~;
+#X obj 240 116 s freq;
+#X floatatom 172 100 5 0 0 0 Frequency - -;
+#X obj 172 157 /;
+#X obj 172 126 swap 1000;
+#X floatatom 172 188 5 0 0 0 - - -;
+#X obj 172 216 delread~ clarinetDel;
+#X obj 172 50 loadbang;
+#X text -23 152 length of the delay line.;
+#X text -24 139 Desired frequency determines;
+#X msg 172 74 700;
+#X msg 209 73 550;
+#X text 264 6 This is a simple model of a clarinet. There are some
+wonky things about it: it does not always respond well to sudden changes
+of frequency \, and some of the harmonics seem unnecessarily strong.
+Also \, pitch cannot go above 700 Hz or so because of block size limitations
+(this can be fixed by placing the delay line in a subpatch with a [block~]
+object).;
+#X obj 162 497 bp~ 700 0.4;
+#X obj 616 209 *~ 0.1;
+#X connect 0 0 34 0;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 7 1;
+#X connect 2 0 32 1;
+#X connect 3 0 31 0;
+#X connect 5 0 14 1;
+#X connect 6 0 7 0;
+#X connect 7 0 19 0;
+#X connect 7 0 47 0;
+#X connect 8 0 3 0;
+#X connect 9 0 8 1;
+#X connect 10 0 8 0;
+#X connect 11 0 10 1;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 12 1 13 1;
+#X connect 13 0 9 1;
+#X connect 14 0 4 0;
+#X connect 14 0 4 1;
+#X connect 15 0 11 0;
+#X connect 16 0 0 0;
+#X connect 17 0 10 0;
+#X connect 18 0 6 1;
+#X connect 20 0 16 0;
+#X connect 21 0 1 0;
+#X connect 22 0 15 0;
+#X connect 23 0 48 0;
+#X connect 27 0 47 1;
+#X connect 31 0 32 0;
+#X connect 32 0 18 0;
+#X connect 32 0 6 0;
+#X connect 34 0 2 1;
+#X connect 36 0 38 0;
+#X connect 36 0 35 0;
+#X connect 37 0 39 0;
+#X connect 38 0 37 0;
+#X connect 38 1 37 1;
+#X connect 39 0 40 0;
+#X connect 40 0 17 0;
+#X connect 40 0 9 0;
+#X connect 41 0 44 0;
+#X connect 44 0 36 0;
+#X connect 45 0 36 0;
+#X connect 47 0 14 0;
+#X connect 48 0 34 1;
